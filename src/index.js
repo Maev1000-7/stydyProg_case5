@@ -6,7 +6,9 @@
   Из index.js не допускается что то экспортировать
 */
 
-import { initializeStartingPage } from "./components/card.js"
+import { initializeStartingPage } from "./scripts/components/card.js"
+
+import './styles/index.css';
 
 initializeStartingPage()
 
