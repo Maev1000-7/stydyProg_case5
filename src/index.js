@@ -8,7 +8,7 @@
 
 import { initializeStartingPage } from "./scripts/components/card.js"
 
-import './styles/index.css';
+import './pages/index.css';
 
 initializeStartingPage()
 

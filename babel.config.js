@@ -1,7 +1,8 @@
-const presents = [
+const { version } = require("html-webpack-plugin");
+
+const presets = [
   [
-    "@babel/present-env",
-    {
+    "@babel/preset-env", {
       targets: {
         edge: "17",
         ie: "11",
@@ -9,9 +10,16 @@ const presents = [
         chrome: "64",
         safari: "11.1",
       },
-      useBuiltIns: "entry",
-    },
-  ],
+      // useBuiltIns: "entry",
+    }],
 ];
 
-module.exports = { presents };
+const plugins = [[
+  "babel-plugin-polyfill-corejs3", {
+    method: "usage-pure", 
+    version: "3.50"
+  }]
+]
+
+
+module.exports = { presets, plugins };
