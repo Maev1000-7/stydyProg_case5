@@ -1,66 +1,46 @@
 
-// Файл со всеми функциями и DOM узлами
+import { togglePopUp } from "./modal.js";
 
-// import { cli } from "webpack";
-import { initialCards } from "../cards.js";
+export { createCard, submitNewCardForm };
 
-import { toggleProfilePopUp, toggleCardPopUp, handlePopUpImage, togglePopUpImage } from "./modal.js";
-
-const placesList = document.querySelector('.places__list');
-const cardTemplate = document.querySelector('#card-template').content;
-const cardsBundle = document.createDocumentFragment();
-
-
-export function deleteCard(evt){
+function deleteCard(evt){
   evt.target.closest('.card').remove();
 }
 
-// export function handleLike(evt){
-//   evt.target.classList.toggle('card__like-button_is-active');
-// }
+function likeCard(evt){
+  evt.target.classList.toggle('card__like-button_is-active');
+}
 
-function createCard(cardsInfo){
+
+function createCard(cardsInfoSrc, cardsInfoText){
+  const cardTemplate = document.querySelector('#card-template').content;
   const card = cardTemplate.querySelector('.places__item.card').cloneNode(true);
   const deleteButton = card.querySelector('.card__control-button_type_delete');
-
+  const likeButton = card.querySelector('.card__like-button');
   
   deleteButton.addEventListener('click', deleteCard);
-  // const likeButton = document.querySelector('card__like-button');
-  // likeButton.addEventListener('click', handleLike);
+  likeButton.addEventListener('click', likeCard);
  
-  card.querySelector('.card__image').src = cardsInfo.link;
-  card.querySelector('.card__title').textContent = cardsInfo.name;
-  cardsBundle.append(card);
-}
-
-
-const profileEditButton = document.querySelector('.profile__edit-button');
-const closeProfileEditPopUp = document.querySelector('.popup_type_edit .popup__close');
-
-const addCardButton = document.querySelector('.profile__add-button');
-const closeCardPopUpButton = document.querySelector('.popup_type_new-card .popup__close ');
-
-const placesPageSection = document.querySelector('.places.page__section');
-const popUpImageCloseButton = document.querySelector('.popup__content_content_image .popup__close');
-
-
-
-
-export function initializeStartingPage(){
-  initialCards.forEach(createCard);
-  placesList.append(cardsBundle);
+  card.querySelector('.card__image').src = cardsInfoSrc;
+  card.querySelector('.card__title').textContent = cardsInfoText;
   
-
-  addCardButton.addEventListener('click', toggleCardPopUp);
-  closeCardPopUpButton.addEventListener('click', toggleCardPopUp);
-
-  profileEditButton.addEventListener('click', toggleProfilePopUp);
-  closeProfileEditPopUp.addEventListener('click', toggleProfilePopUp);
-
-  placesPageSection.addEventListener('click', handlePopUpImage);
-  popUpImageCloseButton.addEventListener('click', togglePopUpImage);
+  return card;
 }
 
 
+function submitNewCardForm(evt){
+  evt.preventDefault();
+  const placesList = document.querySelector('.places__list');
+  
+  const placeNameInput = evt.target.elements['place-name'];
+  const placeImageLinkInput = evt.target.elements['place-link'];
+  
+  let cardInfoSrc = placeImageLinkInput.value;
+  let cardInfoText = placeNameInput.value;
+  const card = createCard(cardInfoSrc, cardInfoText);
+  placesList.prepend(card);
 
+  togglePopUp(evt.target.closest('.popup'));
+  evt.target.removeEventListener('submit', submitNewCardForm)
+}
 
