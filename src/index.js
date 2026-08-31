@@ -91,8 +91,3 @@ popUpImageCloseButton.addEventListener('click', ()=>{
   togglePopUp(imagePopUp);
 });
 
-
-
-
-
-
