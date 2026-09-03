@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +8,6 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mesto</title>
-
   </head>
   <body class="page">
     <div class="page__content">
@@ -22,11 +21,13 @@
       <main class="content">
         <section class="profile page__section">
           <div>
-        <img class="profile__image" src="<%=require('../src/images/avatar.jpg')%>" 
-        alt=""
-        >
-        </div>
-       
+            <img
+              class="profile__image"
+              src="<%=require('../src/images/avatar.jpg')%>"
+              alt=""
+            />
+          </div>
+
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" type="button"></button>
@@ -46,7 +47,7 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__form" name="edit-profile">
+          <form class="popup__form" name="edit-profile" novalidate>
             <label class="popup__label">
               <input
                 type="text"
@@ -54,7 +55,18 @@
                 id="user-name"
                 class="popup__input popup__input_type_name"
                 placeholder="Имя"
-              />
+
+                required
+                minlength="2"
+                maxlength="40"
+                pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+                
+
+                
+                data-error-message="Поле может содержать только латиницу и кириллицу, знаки дефиса и пробелы"
+              /> 
+
+              <span class="user-name-error"></span>
             </label>
             <label class="popup__label">
               <input
@@ -63,12 +75,20 @@
                 id="user-description"
                 class="popup__input popup__input_type_description"
                 placeholder="Занятие"
+                required
+
+                required
+                minlength="2"
+                maxlength="200"
+                pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+
+                
+                data-error-message="Поле может содержать только латиницу и кириллицу, знаки дефиса и пробелы"
               />
+
+              <span class="user-description-error"></span>
             </label>
-            <button
-              type="submit"
-              class="button popup__button"
-            >
+            <button type="submit" class="button popup__button">
               Сохранить
             </button>
           </form>
@@ -79,7 +99,7 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Новое место</h3>
-          <form class="popup__form" name="new-place">
+          <form class="popup__form" name="new-place" novalidate>
             <label class="popup__label">
               <input
                 type="text"
@@ -87,7 +107,17 @@
                 id="place-name"
                 class="popup__input popup__input_type_card-name"
                 placeholder="Название"
+                required
+
+                required
+                minlength="2"
+                maxlength="30"
+                pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$"
+                
+                data-error-message="Поле может содержать только латиницу и кириллицу, знаки дефиса и пробелы"
               />
+
+              <span class="place-name-error"></span>
             </label>
             <label class="popup__label">
               <input
@@ -96,14 +126,13 @@
                 id="place-link"
                 class="popup__input popup__input_type_url"
                 placeholder="Ссылка на картинку"
+                
+                required
               />
+
+              <span class="place-link-error"></span>
             </label>
-            <button
-              type="submit"
-              class="button popup__button"
-            >
-              Создать
-            </button>
+            <button type="submit" class="button popup__button">Создать</button>
           </form>
         </div>
       </div>
@@ -120,20 +149,21 @@
         <div class="popup__content">
           <button type="button" class="popup__close"></button>
           <h3 class="popup__title">Обновить аватар</h3>
-          <form class="popup__form" name="edit-avatar">
+          <form class="popup__form" name="edit-avatar" novalidate>
             <label class="popup__label">
+              
               <input
                 type="url"
                 name="user-avatar"
                 id="user-avatar"
                 class="popup__input popup__input_type_avatar"
                 placeholder="Ссылка на изображение"
+                required
               />
+
+              <span class="user-avatar-error"></span>
             </label>
-            <button
-              type="submit"
-              class="button popup__button"
-            >
+            <button type="submit" class="button popup__button">
               Сохранить
             </button>
           </form>
@@ -141,14 +171,18 @@
       </div>
     </div>
 
-
-
     <template id="card-template">
       <li class="places__item card">
         <img class="card__image" src="" alt="" />
         <div class="card__control">
-          <button type="button" class="card__control-button card__control-button_type_info"></button>
-          <button type="button" class="card__control-button card__control-button_type_delete"></button>
+          <button
+            type="button"
+            class="card__control-button card__control-button_type_info"
+          ></button>
+          <button
+            type="button"
+            class="card__control-button card__control-button_type_delete"
+          ></button>
         </div>
         <div class="card__description">
           <h2 class="card__title"></h2>
@@ -157,26 +191,22 @@
       </li>
     </template>
 
-   <template id="popup-info-definition-template">
-     <div class="popup__info-item">
-       <dt class="popup__info-term"></dt>
-       <dd class="popup__info-description"></dd>
-     </div>
-   </template>
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <dt class="popup__info-term"></dt>
+        <dd class="popup__info-description"></dd>
+      </div>
+    </template>
 
-   <template id="popup-info-user-preview-template">
-     <li class="popup__list-item popup__list-item_type_badge"></li>
-   </template>
-
-
+    <template id="popup-info-user-preview-template">
+      <li class="popup__list-item popup__list-item_type_badge"></li>
+    </template>
   </body>
 </html>
 
-
-
 <!-- Что то очень странное  -->
 
-     <!-- <div class="popup popup_type_info">-->
+<!--      <div class="popup popup_type_info">-->
 <!--        <div class="popup__content popup__content_content_info">-->
 <!--          <button type="button" class="popup__close"></button>-->
 <!--          <h3 class="popup__title"></h3>-->
@@ -187,7 +217,7 @@
 <!--        </div>-->
 <!--      </div> -->
 
-          <!-- <div class="card__likes">
+<!--      <div class="card__likes">
             <button type="button" class="card__like-button"></button>
             <p class="card__like-count"></p>
           </div> -->

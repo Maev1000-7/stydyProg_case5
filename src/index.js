@@ -12,6 +12,8 @@ import { createCard, submitNewCardForm } from "./scripts/components/card.js";
 
 import { togglePopUp, closePopUpByOverlayClick, closePopUpByEscapeKey, submitProfileEditForm, handlePopUpImage } from "./scripts/components/modal.js";
 
+import { enableValidation } from "./scripts/components/validation.js";
+
 import "./pages/index.css";
 
 window.addEventListener('keydown', closePopUpByEscapeKey);
@@ -38,7 +40,10 @@ addCardButton.addEventListener('click',()=>{
   togglePopUp(addCardPopUp);
 
   const newCardForm = document.forms['new-place'];
-  newCardForm.addEventListener('submit', submitNewCardForm)
+
+  
+  newCardForm.addEventListener('submit', submitNewCardForm);
+
 });
 
 
@@ -91,3 +96,12 @@ popUpImageCloseButton.addEventListener('click', ()=>{
   togglePopUp(imagePopUp);
 });
 
+
+enableValidation();
+
+
+
+
+
+
+ 

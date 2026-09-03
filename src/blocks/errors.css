@@ -1,0 +1,31 @@
+.form__input_type_error{
+/* поле ввода */
+    width: 100%;
+    /* height: 50px; */
+
+    border: 0;
+    border-bottom: 1px solid red;
+    font-size: 14px;
+    line-height: 18px;
+    box-sizing: border-box;
+
+    padding: 10px 0 0 ;
+    margin-bottom: 10px;
+}
+
+
+.form__input-error_active{
+/* спан блок с надписью об ошибке */
+    color: red;
+    height: 30px;
+    
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+span{
+    height: 100px; 
+}
+
