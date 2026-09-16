@@ -1,7 +1,13 @@
+import {saveProfileChanges, updateAvatar} from "./api.js"
+
 
 
 function togglePopUp(popUp) {
+  const body = document.querySelector('body');
+  
   popUp.classList.toggle("popup_is-opened");
+  body.classList.toggle("stop-scrolling");
+
 }
 
 
@@ -14,9 +20,11 @@ function closePopUpByOverlayClick(evt) {
 
 
 function closePopUpByEscapeKey(evt){
-  const popUp = document.querySelector('.popup_is-opened');
   if (evt.key === 'Escape'){
-    togglePopUp(popUp); 
+    const popUp = document.querySelector('.popup_is-opened');
+    if (popUp){
+       togglePopUp(popUp); 
+    }
   }  
 }
 
@@ -35,9 +43,29 @@ function submitProfileEditForm(evt){
   profileTitle.textContent = userName.value;
   profileDescription.textContent = userDescription.value;
 
+  saveProfileChanges(userName.value, userDescription.value);
   togglePopUp(profileEditPopUp);
 
   evt.target.removeEventListener('submit', submitProfileEditForm);
+}
+
+
+function changeProfilePictureForm(evt){
+  evt.preventDefault();
+
+  const pictureEditPopUp = document.querySelector(".popup_type_edit-avatar");
+
+  const inputImageLink = evt.target.elements['user-avatar'];
+  
+  const profilePicture = document.querySelector('.profile__image')
+
+  profilePicture.src = inputImageLink.value;
+
+  updateAvatar(inputImageLink.value);
+
+  togglePopUp(pictureEditPopUp);
+
+  evt.target.removeEventListener('submit', changeProfilePictureForm);
 }
 
 
@@ -60,6 +88,9 @@ function handlePopUpImage(evt){
 }
 
 
-export { togglePopUp, closePopUpByOverlayClick, closePopUpByEscapeKey, submitProfileEditForm, handlePopUpImage };
+
+
+
+export { togglePopUp, closePopUpByOverlayClick, closePopUpByEscapeKey, submitProfileEditForm, handlePopUpImage, changeProfilePictureForm };
 
 

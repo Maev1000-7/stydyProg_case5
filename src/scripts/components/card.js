@@ -1,11 +1,17 @@
 
+import { saveCard , deleteCardApi, getCardsInformation} from "./api.js";
 import { togglePopUp } from "./modal.js";
 
 export { createCard, submitNewCardForm };
 
 function deleteCard(evt){
   evt.target.closest('.card').remove();
+  const ID = getCardsInformation();
+  deleteCardApi();
+
 }
+
+
 
 function likeCard(evt){
   evt.target.classList.toggle('card__like-button_is-active');
@@ -35,10 +41,14 @@ function submitNewCardForm(evt){
   const placeNameInput = evt.target.elements['place-name'];
   const placeImageLinkInput = evt.target.elements['place-link'];
   
-  let cardInfoSrc = placeImageLinkInput.value;
-  let cardInfoText = placeNameInput.value;
-  const card = createCard(cardInfoSrc, cardInfoText);
+  const cardTitle = placeNameInput.value;
+
+  const cardInfoSrc = placeImageLinkInput.value;
+
+  const card = createCard(cardInfoSrc, cardTitle);
   placesList.prepend(card);
+
+  saveCard(cardTitle, cardInfoSrc);
 
   togglePopUp(evt.target.closest('.popup'));
   evt.target.removeEventListener('submit', submitNewCardForm)
