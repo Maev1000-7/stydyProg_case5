@@ -1,16 +1,10 @@
 
-import { saveCard , deleteCardApi, getCardsInformation} from "./api.js";
+import { deleteCardApi, saveCard } from "./api.js";
+// import { deleteCardApi } from "./api.js";
+
 import { togglePopUp } from "./modal.js";
 
 export { createCard, submitNewCardForm };
-
-function deleteCard(evt){
-  evt.target.closest('.card').remove();
-  const ID = getCardsInformation();
-  deleteCardApi();
-
-}
-
 
 
 function likeCard(evt){
@@ -18,20 +12,67 @@ function likeCard(evt){
 }
 
 
-function createCard(cardsInfoSrc, cardsInfoText){
+// const deleteCard(evt) => {
+//     const deleteConfirmButton = document.forms["remove-card"];
+  
+
+//     deleteConfirmButton.addEventListener('submit', (evt) => {
+//       evt.preventDefault();
+//       deleteCardApi(cardData._id)
+//       togglePopUp(deleteCardPopUp);
+//       card.remove();
+//     })
+// } 
+
+
+    // deleteConfirmButton.addEventListener('submit', submitRemove )
+function createCard(cardData, userID){
+  const source = cardData.link;
+  const title = cardData.name;
+
+  
   const cardTemplate = document.querySelector('#card-template').content;
   const card = cardTemplate.querySelector('.places__item.card').cloneNode(true);
-  const deleteButton = card.querySelector('.card__control-button_type_delete');
-  const likeButton = card.querySelector('.card__like-button');
   
-  deleteButton.addEventListener('click', deleteCard);
+  const deleteButton = card.querySelector('.card__control-button_type_delete');
+  
+  deleteButton.addEventListener('click', () => {
+    const deleteCardPopUp = document.querySelector(".popup_type_remove-card");
+    togglePopUp(deleteCardPopUp);
+  });
+
+
+  // if (cardData.owner._id !== userID) {
+  //   deleteButton.remove();
+  // }
+  
+  const likeButton = card.querySelector('.card__like-button');
+  const countLikes = card.querySelector(".card__like-count");
+  
+
+  // Вот тут что то не так
+  // countLikes.textContent = cardData.likes.length;
+
+
+  // Ну и следовательно тут 
+  // cardData.likes.forEach((like) => {
+  //     if (like._id) {
+  //       if (like._id == userID){
+  //         likeButton.classList.toggle("card__like-button_is-active")
+  //       }
+  //     }
+  // });
+  
+
+  
   likeButton.addEventListener('click', likeCard);
  
-  card.querySelector('.card__image').src = cardsInfoSrc;
-  card.querySelector('.card__title').textContent = cardsInfoText;
-  
+  card.querySelector('.card__image').src = source;
+  card.querySelector('.card__title').textContent = title;
+
   return card;
 }
+
 
 
 function submitNewCardForm(evt){

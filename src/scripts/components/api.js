@@ -1,12 +1,11 @@
-const baseUrl = "https://nomoreparties.co/v1/wff-cohort-17/";
 
-/**
- * Токен для авторизации 
-*/
+const baseUrl = "https://nomoreparties.co/v1/wff-cohort-17/";
 const headers = {
     authorization: "15c26702-9c69-418c-9ef2-8c38a85250dc",
     "Content-Type": "application/json",
 };
+
+
 
 function getResponceFromServer(responce){
     if (!responce.ok){
@@ -14,6 +13,8 @@ function getResponceFromServer(responce){
     }
     return responce.json();
 }
+
+
 
 function getUsersInformation(){
     return fetch(baseUrl + 'users/me', {
@@ -31,7 +32,7 @@ function getCardsInformation(){
 
 
 
-function initializePage(){
+function getData(){
     return Promise.all([getUsersInformation(), getCardsInformation()]);
 } 
 
@@ -94,7 +95,7 @@ function updateAvatar(avatarImageLink) {
 }
 
 export {
-    initializePage, 
+    getData, 
     saveCard, 
     saveProfileChanges, 
     deleteCardApi,

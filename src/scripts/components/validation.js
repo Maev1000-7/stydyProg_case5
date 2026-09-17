@@ -20,9 +20,7 @@ const hideInputError = (formElement, inputElement) => {
 
 const isValid = (formElement, inputElement) => {
     if (inputElement.validity.patternMismatch) {
-
-            // нужно добавить в html датасет атрибуты с сообщением 
-
+      
         inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
         inputElement.setCustomValidity("");
@@ -75,14 +73,9 @@ const setEventListeners = (formElement) => {
 
 
 export const enableValidation = () => {
-  // Найдём все формы с указанным классом в DOM,
-  // сделаем из них массив методом Array.from
   const formList = Array.from(document.querySelectorAll('.popup__form'));
-
-  // Переберём полученную коллекцию
+  
   formList.forEach((formElement) => {
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
     setEventListeners(formElement);
   });
 };
