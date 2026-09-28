@@ -1,7 +1,5 @@
 import {saveProfileChanges, updateAvatar} from "./api.js"
 
-
-
 function togglePopUp(popUp) {
   const body = document.querySelector('body');
   body.classList.toggle("stop-scrolling");

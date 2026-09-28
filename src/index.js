@@ -6,17 +6,15 @@
   Из index.js не допускается что то экспортировать
 */
 
-// import { initialCards } from "./scripts/cards.js";
-
-import { createCard, submitNewCardForm } from "./scripts/components/card.js";
+import { createCard } from "./scripts/components/card.js";
 
 import {
   togglePopUp,
   closePopUpByOverlayClick,
   closePopUpByEscapeKey,
-  submitProfileEditForm,
-  handlePopUpImage,
-  changeProfilePictureForm,
+  handlePopUpImage, 
+  changeProfilePictureForm, 
+  submitProfileEditForm
 } from "./scripts/components/modal.js";
 
 import { enableValidation } from "./scripts/components/validation.js";
@@ -31,10 +29,12 @@ let userID;
 const profileName = document.querySelector(".profile__title");
 const profileDescriotion = document.querySelector(".profile__description");
 const profilePicture = document.querySelector(".profile__image");
+
 const profileEditAvatarPopUp = document.querySelector(
   ".popup_type_edit-avatar",
 );
 
+const placesList = document.querySelector('.places__list');
 
 // Подгружаем карточки и профиль
 getData().then(
@@ -83,17 +83,46 @@ closePopUpButtons.forEach((closeButton) => {
 
 
 
-// Добавление карточки пользователем 
-const placesList = document.querySelector(".places__list");
 
-const addCardButton = document.querySelector(".profile__add-button");
-const addCardPopUp = document.querySelector(".popup_type_new-card");
 
-addCardButton.addEventListener("click", () => {
-  togglePopUp(addCardPopUp);
-  const newCardForm = document.forms["new-place"];
-  newCardForm.addEventListener("submit", submitNewCardForm);
-});
+// function handleSubmitCard(evt) {
+//   evt.preventDefault();
+
+  // const placesList = document.querySelector('.places__list');
+//   const placeNameInput = evt.target.elements['place-name'];
+//   const placeImageLinkInput = evt.target.elements['place-link'];
+
+//   const cardTitle = placeNameInput.value;
+//   const cardInfoSrc = placeImageLinkInput.value;
+
+//   saveCard(cardTitle, cardInfoSrc)
+//     .then((cardData) => {
+//       const card = createCard(cardData, userID);
+//       placesList.prepend(card);
+//       evt.target.reset(); 
+//     })
+//     .catch((err) => {
+//       console.error(`Ошибка при сохранении карточки: ${err}`);
+//     });
+
+//   togglePopUp(evt.target.closest('.popup'));
+
+//   // 3. Удаляем этот обработчик прямо внутри него (если нужно снять его сразу после первой отправки)
+//   evt.target.removeEventListener("submit", handleSubmitCard);
+// }
+
+// // Добавление карточки пользователем 
+// const placesList = document.querySelector(".places__list");
+
+// const addCardButton = document.querySelector(".profile__add-button");
+// const addCardPopUp = document.querySelector(".popup_type_new-card");
+
+// addCardButton.addEventListener("click", () => {
+//   togglePopUp(addCardPopUp);
+//   const newCardForm = document.forms["new-place"];
+
+//   newCardForm.addEventListener("submit", handleSubmitCard);
+// });
 
 
 // Изменение пользовательского профиля
@@ -117,7 +146,7 @@ profileEditButton.addEventListener("click", () => {
 });
 
 
-// Открытие картинки в посте
+// // Открытие картинки в посте
 const placesPageSection = document.querySelector(".places.page__section");
 
 placesPageSection.addEventListener("click", (evt) => {
@@ -151,45 +180,45 @@ enableValidation();
 
 
 
-// Кладбище кода 
+// // Кладбище кода 
 
 
-// function myCardDebugger(){
-//   getCardsInformation()
-//   .then((cards) => {
-//     cards.forEach((card) => {
-//       const ownerId = card.owner._id;
-//       const cardId = card._id;
-//       console.log(ownerId);
-//       console.log(cardId);
-//     })
-//   })
-// };
+// // function myCardDebugger(){
+// //   getCardsInformation()
+// //   .then((cards) => {
+// //     cards.forEach((card) => {
+// //       const ownerId = card.owner._id;
+// //       const cardId = card._id;
+// //       console.log(ownerId);
+// //       console.log(cardId);
+// //     })
+// //   })
+// // };
 
-// function likeShowLikeCount(){
+// // function likeShowLikeCount(){
 
-//   const cards = document.querySelectorAll(".card");
+// //   const cards = document.querySelectorAll(".card");
 
-//   getCardsInformation()
-//   .then((cards) => {
-//     cards.forEach((card) => {
-//       const ownerId = card.owner._id;
-//       const cardId = card._id;
+// //   getCardsInformation()
+// //   .then((cards) => {
+// //     cards.forEach((card) => {
+// //       const ownerId = card.owner._id;
+// //       const cardId = card._id;
 
-//       if (cardId == "6aaba36bac7047007b7aa36f") {
+// //       if (cardId == "6aaba36bac7047007b7aa36f") {
 
-//       };
+// //       };
 
-//     })
-//   })
-// }
+// //     })
+// //   })
+// // }
 
-// "6aaba36bac7047007b7aa36f"
-// "6aaba3121f87fd0087f013d4"
-// "6aaa88e44e650d0093873381"
+// // "6aaba36bac7047007b7aa36f"
+// // "6aaba3121f87fd0087f013d4"
+// // "6aaa88e44e650d0093873381"
 
-// "69029c52df01f61be6da1f76"
-// "69029c424b385d1bf2b803ac"
-// "69029c384f58071c0af4cb92"
+// // "69029c52df01f61be6da1f76"
+// // "69029c424b385d1bf2b803ac"
+// // "69029c384f58071c0af4cb92"
 
-// "69029c2cfb9e0f1bfe93f194"
+// // "69029c2cfb9e0f1bfe93f194"
